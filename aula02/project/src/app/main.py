@@ -1,8 +1,3 @@
-"""ponto de entrada da aplicacao.
-
-Execute a partir da pasta aula02 com:
-    python -m project.src.app.main
-"""
 
 from project.src.controller.list_controller import Controller
 
