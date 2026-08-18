@@ -1,14 +1,13 @@
 import os
+from model.util import Util
 
 
 class View:
 
-    @staticmethod
-    def limpar():
-        os.system('cls')
         
     @staticmethod
     def exibir_lista(lista, frase):
+        Util.limpar()
         print(frase)
         for item in lista:
             print(item)
