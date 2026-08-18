@@ -6,7 +6,5 @@ class Util:
         for _ in range(quantidade):
             lista.append( random.randint(inicio, fim) ) 
             
-    @staticmethod
-    def limpar():
-        os.system('cls')
+ 
         
