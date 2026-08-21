@@ -1,1 +1,10 @@
-__pycache__
+# Cache de bytecode do Python
+__pycache__/
+*.py[cod]
+
+# Artefatos de compilacao Java
+*.class
+
+# Ambientes virtuais
+.venv/
+venv/

@@ -5,6 +5,8 @@ from app.view.processo_view import ProcessoView
 class ProcessoController:
     @staticmethod
     def executar():
+        """Metodo que executa funções de popular, ordenar e exibir lista
+        """
         lista_processos = []
         Util.popular_lista(lista_processos, quantidade=4)
         
