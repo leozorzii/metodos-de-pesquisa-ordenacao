@@ -2,6 +2,11 @@ class Ordenacao:
     
     @staticmethod
     def bolha(lista):
+        """Método de ordenação que ordena objetos de uma lista
+
+        Returns:
+            List(int): retorna a lista ordenada
+        """
         houve_troca = True
         n = len(lista)
         
