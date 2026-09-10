@@ -96,3 +96,33 @@
 - **`TestOrdenacao`:** Executa os algoritmos, mede seus tempos e exibe as métricas para comparação.
 - **Objetivo:** Avaliar o desempenho dos métodos de ordenação em um experimento prático.
 - **Resultado Final:** O foco foi medir e comparar a execução dos algoritmos, não desenvolver o código a partir de testes automatizados prévios.
+
+
+## Aula 7
+
+**MergeSort**
+- Categoria: codificação complexa
+- Complexidade: O(n log n)
+- Implementado no ecossistema Java
+- Método recursivo que divide a estrutura para ordenar (princípio de árvore)
+  - 1 - método de recursão
+  - 2 - método de intercalação (merge) — aqui ocorre a ordenação; é no retorno das chamadas recursivas
+  - Sempre divide a estrutura de forma mais ou menos uniforme
+
+Recursão
+|
+|                               A
+|                 volta da      |
+|                 recursão      |
+V                 intercalação  |
+                  ------------
+                   ordenação
+
+**QuickSort** **`Dividir para conquistar`**
+- Categoria: codificação complexa
+- Complexidade: O(n log n)
+- Implementado no ecossistema C#
+- Método recursivo que divide a estrutura para ordenar (princípio de árvore)
+  - 1 - recursão
+  - 2 - posicionar o pivô na estrutura
+  - Nunca divide a estrutura de forma uniforme (pivô)
