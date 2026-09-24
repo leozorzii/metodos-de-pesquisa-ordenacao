@@ -4,10 +4,7 @@
  */
 package view;
 
-import model.Model;
-import controller.Ordenacao;
-import controller.Util;
-
+import controller.Controller;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -22,10 +19,10 @@ public class JFramePrincipal extends javax.swing.JFrame {
     /**
      * Creates new form JFramePrincipal
      */
+    private Controller controller = new Controller();
     public JFramePrincipal() {
         initComponents();
         jPanelResultados.setVisible(false);
-        Model.lista = new ArrayList<>();
     }
 
     /**
@@ -63,6 +60,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         jButtonAbrir.addActionListener(this::jButtonAbrirActionPerformed);
 
         jButtonLimpar.setText("Limpar");
+        jButtonLimpar.addActionListener(this::jButtonLimparActionPerformed);
 
         jLabel2.setText("Métodos de Ordenação:");
 
@@ -182,21 +180,50 @@ public class JFramePrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonExecutarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExecutarActionPerformed
-        jPanelResultados.setVisible(true);
-    }//GEN-LAST:event_jButtonExecutarActionPerformed
+        if(controller.quantidade() == 0) {
+            JOptionPane.showMessageDialog(this, "Carregue uma lista de números", "Atenção", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        String metodo = jComboBoxMetodos.getSelectedItem().toString();
+        long inicio = System.currentTimeMillis();
+        ArrayList<Float> metricas = controller.execute(metodo);
+        long tempo = System.currentTimeMillis() - inicio;
+
+        if(metricas.size() < 2){
+            JOptionPane.showMessageDialog(this, "Metodo invalido ou fora do padrao suportado", "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+            jTextFieldQtdNumeros.setText(String.valueOf(controller.quantidade()));
+            jTextFieldQtdComparacoes.setText(String.valueOf(metricas.get(0).longValue()));
+            jTextFieldQtdTrocas.setText(String.valueOf(metricas.get(1).longValue()));
+            jTextFieldTempo.setText(String.valueOf(tempo));
+            jPanelResultados.setVisible(true);
+
+            }//GEN-LAST:event_jButtonExecutarActionPerformed
 
     private void jButtonAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAbrirActionPerformed
-        if (jTextFieldNomeArquivo.getText().equals("")) {
+        String nomeArquivo = jTextFieldNomeArquivo.getText();
+        if (nomeArquivo.equals("")) {
             JOptionPane.showMessageDialog(this, "Informe nome do arquivo", "Atenção", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (controller.carregarArquivo(nomeArquivo)) {
+            JOptionPane.showMessageDialog(this, "Lista carregada com sucesso", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            if (Util.carregarArquivoEmLista(jTextFieldNomeArquivo.getText(), Model.lista)) {
-                JOptionPane.showMessageDialog(this, "Lista carregada com sucesso", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-            } else {
-                JOptionPane.showMessageDialog(this, "Problemas para ler o arquivo e carregar a lista", "Erro", JOptionPane.ERROR_MESSAGE);
-                jTextFieldNomeArquivo.setText("");
-            }
+            JOptionPane.showMessageDialog(this, "Problemas para ler o arquivo e carregar a lista", "Erro", JOptionPane.ERROR_MESSAGE);
+            jTextFieldNomeArquivo.setText("");
         }
     }//GEN-LAST:event_jButtonAbrirActionPerformed
+
+    private void jButtonLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLimparActionPerformed
+        controller.limparLista();
+        jTextFieldNomeArquivo.setText("");
+        jTextFieldQtdNumeros.setText("");
+        jTextFieldQtdComparacoes.setText("");
+        jTextFieldQtdTrocas.setText("");
+        jTextFieldTempo.setText("");
+        jPanelResultados.setVisible(false);
+    }//GEN-LAST:event_jButtonLimparActionPerformed
 
     /**
      * @param args the command line arguments

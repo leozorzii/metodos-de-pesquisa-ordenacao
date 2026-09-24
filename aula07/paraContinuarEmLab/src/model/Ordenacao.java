@@ -1,9 +1,27 @@
-package controller;
+package model;
 
 import java.util.ArrayList;
 
+/**
+ * Algoritmos de ordenação usados no laboratório e suas métricas de desempenho.
+ *
+ * <p>Cada método ordena a lista recebida e devolve duas métricas em
+ * {@code ArrayList}: quantidade de comparações (índice 0) e quantidade de
+ * trocas (índice 1).</p>
+ *
+ * @author laboratorio
+ */
 public class Ordenacao {
-    
+
+    /**
+     * Ordena a lista pelo método da bolha (Bubble Sort).
+     *
+     * <p>Percorre pares vizinhos e troca quando estão fora de ordem, repetindo
+     * o processo enquanto houver troca em uma passagem completa.</p>
+     *
+     * @param lista Lista de inteiros que será ordenada in-place.
+     * @return Métricas da execução: comparações no índice 0 e trocas no índice 1.
+     */
     public static ArrayList bolha(ArrayList<Integer> lista) {
         ArrayList<Float> metricas = new ArrayList<>();
         long qtdComparacoes = 0;
@@ -29,14 +47,26 @@ public class Ordenacao {
         return metricas;
     }
 
-    
+    /**
+     * Ordena a lista pelo método da seleção (Selection Sort).
+     *
+     * <p>Em cada posição {@code i}, procura o menor restante à direita e
+     * o coloca nessa posição. A troca precisa ocorrer dentro do laço de
+     * {@code i}: se ficar fora, o índice já vale {@code lista.size()} e
+     * {@code lista.get(i)} estoura o limite do vetor.</p>
+     *
+     * @param lista Lista de inteiros que será ordenada in-place.
+     * @return Métricas da execução: comparações no índice 0 e trocas no índice 1.
+     */
     public static ArrayList selecao(ArrayList<Integer> lista) {
         ArrayList<Float> metricas = new ArrayList<>();
         long qtdComparacoes = 0;
         long qtdTrocas = 0;
         int i, j, posMenor, aux;
         posMenor = 0;
-        
+
+        // A troca fica DENTRO do for (i). Fora do laço, i == lista.size()
+        // e lista.get(i) gera IndexOutOfBoundsException.
         for (i = 0; i < lista.size(); i++) {
             posMenor = i;
             for (j = i+1; j < lista.size(); j++) {
@@ -45,18 +75,27 @@ public class Ordenacao {
                     posMenor = j;
                 }
             }
-        }
-        if (posMenor != i) {
-            aux = lista.get(i);
-            lista.set(i, lista.get(posMenor));
-            lista.set(posMenor, aux);
-            qtdTrocas++;
+            if (posMenor != i) {
+                aux = lista.get(i);
+                lista.set(i, lista.get(posMenor));
+                lista.set(posMenor, aux);
+                qtdTrocas++;
+            }
         }
         metricas.add((float)qtdComparacoes);
         metricas.add((float)qtdTrocas);
         return metricas;
     }
-    
+
+    /**
+     * Ordena a lista pelo método da inserção (Insertion Sort).
+     *
+     * <p>Toma cada elemento da esquerda para a direita e o desloca entre os
+     * já visitados até encontrar a posição correta de inserção.</p>
+     *
+     * @param lista Lista de inteiros que será ordenada in-place.
+     * @return Métricas da execução: comparações no índice 0 e trocas no índice 1.
+     */
     public static ArrayList insercao(ArrayList<Integer> lista) {
         ArrayList<Float> metricas = new ArrayList<>();
         long qtdComparacoes = 0;
@@ -75,7 +114,17 @@ public class Ordenacao {
         metricas.add((float)qtdTrocas);
         return metricas;
     }
-    
+
+    /**
+     * Ordena a lista pelo método do pente (Comb Sort).
+     *
+     * <p>Compara elementos separados por uma distância que vai diminuindo
+     * (divisão por 1,3). Quando a distância chega a 1, o comportamento
+     * se aproxima do da bolha até não haver mais trocas.</p>
+     *
+     * @param lista Lista de inteiros que será ordenada in-place.
+     * @return Métricas da execução: comparações no índice 0 e trocas no índice 1.
+     */
     public static ArrayList pente(ArrayList<Integer> lista) {
         ArrayList<Float> metricas = new ArrayList<>();
         long qtdComparacoes = 0;
