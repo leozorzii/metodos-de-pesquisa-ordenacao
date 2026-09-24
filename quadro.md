@@ -191,3 +191,70 @@ Não existe um único “melhor”; depende do volume, da memória, da implement
 | Melhoria simples sobre a bolha | Pente (Comb Sort) |
 | Pesquisa em lista **desordenada** | Sequencial (linear) |
 | Pesquisa em lista **ordenada** | Binária (muito menos comparações) |
+
+
+AULA 08
+
+estabilidade vs Instabilidade
+estavel:
+        bolha, insercao e merge
+instaveis: 
+          seleção 
+          pente(por causa da distancia/gap/h)
+          quick(por causa da distancia)
+Complexida: alta(muito esforço) versus baixa(pouco esforço)
+  -- como se calcula o esforço ou a complexidade em ordenacao = (quantidade de comparacoes + quantidade de trocas)
+  -Funções de Complexidade:
+  - O(n!) -  fatorial
+  - O(n^k) - polinomial
+  - O(n^2) - exponencial
+  - O(n. log n) - linear vezes logaritmica
+  - O(n) - linear (1000 elementos = 1000 de esforço)
+  - O(log n) logaritmica(todos os algoritmos baseados na filosifa de ÁRVORE)
+  *Peculiaridades*
+  - bolha - agitacao: a estrutura ja estiver ordenada, ha baixo esforço - O(n) 
+  pente: com a entrada da distancia, o pente fica muito melhor em termos de complexidade. o pente trabalha com distancia. Enquanto a distancia foi > 1, o metodo é instavel, quando a distancia = 1, o metodo se transforma no bolha e fica estavel.
+  - seleção: se um vetor estiver ordenado, o metodo continua fazendo o mesmo esforço de ordenação de um vetor desordenado.
+  MERGE e o QUICk: sao baseados em tecnicas recursivas. Para cada metodo, há dois submetodos. ex:
+  merge: chamada recursiva e o submetodo intercalação(ordenação se da na volta do empilhamento)(dividi o max que da e depois volta ordenando)
+  quick: chamada recursiva e o submetodo ´posicionar o pivo no seu lugar certo no empilhamento´, C# o utiliza
+  ganha em processamento mas perde em memoria(!conferir essa afirmacao)
+
+
+--Outros metodos de ordenacao
+*SHELL SORT*: uma evolucao do insercao. Usa a mesma filosofia do pente com o bolha. Ou seja aplica o uso de distancia(gap).
+*NOTA:* Como o pente, o shell, ao trabalhar com distancia é instavel, mas quando a distancia fica 1 ele se transforma no inserção e passa a ser estavel
+
+*HEAP SORT*: baseado na teoria de arvore, porem dentro de uma lista
+
+*BUCKET SORT*: metodo de ordenacao pelo digito do numero
+
+*RADIX SORT*: melhoria do bucket
+
+
+*Exemplo em c# do bolha*
+
+void bolha(List<int>lista)
+{
+  int tmp, dist = lista.Count();
+  bool houve_troca;
+  do 
+  {
+    dist = (int)dist /1.3;
+    if(dist <= 1)
+    {
+      dist = 1;
+    }
+    houve_troca = false;
+    for(int i = 0; i+dist < lista.Count() -1; i++)
+    {
+      if(lista[i] > lista[i+dist])
+      {
+        houve_troca = true;
+        tmp = lista[i];
+        lista[i] = lista[i+dist];
+        lista[i+dist] = tmp;
+      }
+    }
+  }while(dist > 1 || houve_troca);
+}
