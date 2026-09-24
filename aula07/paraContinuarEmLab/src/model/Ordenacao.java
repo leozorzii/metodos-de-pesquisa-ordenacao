@@ -5,11 +5,10 @@ import java.util.ArrayList;
 /**
  * Algoritmos de ordenação usados no laboratório e suas métricas de desempenho.
  *
- * <p>Cada método ordena a lista recebida e devolve duas métricas em
- * {@code ArrayList}: quantidade de comparações (índice 0) e quantidade de
- * trocas (índice 1).</p>
+ * Cada método ordena a lista recebida e devolve duas métricas em
+ * {ArrayList}: quantidade de comparações (índice 0) e quantidade de
+ * trocas (índice 1).
  *
- * @author laboratorio
  */
 public class Ordenacao {
 
@@ -50,11 +49,6 @@ public class Ordenacao {
     /**
      * Ordena a lista pelo método da seleção (Selection Sort).
      *
-     * <p>Em cada posição {@code i}, procura o menor restante à direita e
-     * o coloca nessa posição. A troca precisa ocorrer dentro do laço de
-     * {@code i}: se ficar fora, o índice já vale {@code lista.size()} e
-     * {@code lista.get(i)} estoura o limite do vetor.</p>
-     *
      * @param lista Lista de inteiros que será ordenada in-place.
      * @return Métricas da execução: comparações no índice 0 e trocas no índice 1.
      */
@@ -65,7 +59,7 @@ public class Ordenacao {
         int i, j, posMenor, aux;
         posMenor = 0;
 
-        // A troca fica DENTRO do for (i). Fora do laço, i == lista.size()
+        // A troca fica dentro do for (i). Fora do laço, i == lista.size()
         // e lista.get(i) gera IndexOutOfBoundsException.
         for (i = 0; i < lista.size(); i++) {
             posMenor = i;
@@ -89,9 +83,6 @@ public class Ordenacao {
 
     /**
      * Ordena a lista pelo método da inserção (Insertion Sort).
-     *
-     * <p>Toma cada elemento da esquerda para a direita e o desloca entre os
-     * já visitados até encontrar a posição correta de inserção.</p>
      *
      * @param lista Lista de inteiros que será ordenada in-place.
      * @return Métricas da execução: comparações no índice 0 e trocas no índice 1.
@@ -117,10 +108,6 @@ public class Ordenacao {
 
     /**
      * Ordena a lista pelo método do pente (Comb Sort).
-     *
-     * <p>Compara elementos separados por uma distância que vai diminuindo
-     * (divisão por 1,3). Quando a distância chega a 1, o comportamento
-     * se aproxima do da bolha até não haver mais trocas.</p>
      *
      * @param lista Lista de inteiros que será ordenada in-place.
      * @return Métricas da execução: comparações no índice 0 e trocas no índice 1.

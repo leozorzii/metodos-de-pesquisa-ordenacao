@@ -5,14 +5,7 @@ import model.Ordenacao;
 import model.Util;
 
 /**
- * Orquestra o fluxo entre a view e o modelo.
- *
- * <p>Mantém a lista de números em memória, solicita o carregamento do arquivo,
- * escolhe o algoritmo de ordenação e devolve as métricas (comparações e trocas)
- * para exibição na interface.</p>
- *
- * @author laboratorio
- * @version 1.0
+ * Orquestra o fluxo entre a view e o modelo
  */
 public class Controller {
 
@@ -28,9 +21,6 @@ public class Controller {
      * dados de um arquivo anterior com o novo carregamento.</p>
      *
      * @param nomeArquivo Caminho e nome do arquivo texto com um inteiro por linha.
-     * @return {@code true} se o arquivo foi carregado com sucesso; {@code false} se houve erro.
-     * @author laboratorio
-     * @version 1.0
      */
     public boolean carregarArquivo(String nomeArquivo) {
         listaNumeros.clear();
@@ -47,8 +37,6 @@ public class Controller {
      * @param metodo Nome do método de ordenação selecionado na interface.
      * @return Lista de métricas em que a posição 0 é a quantidade de comparações
      *         e a posição 1 é a quantidade de trocas; lista vazia se o método for inválido.
-     * @author laboratorio
-     * @version 1.0
      */
     public ArrayList<Float> execute(String metodo) {
         ArrayList<Integer> copiaLista = new ArrayList<>(listaNumeros);//nao quebra a referencia original
@@ -72,8 +60,6 @@ public class Controller {
      * <p>Usado pelo botão Limpar da view para recomeçar o experimento
      * sem resíduos da execução anterior.</p>
      *
-     * @author laboratorio
-     * @version 1.0
      */
     public void limparLista() {
         listaNumeros.clear();
@@ -86,8 +72,6 @@ public class Controller {
      * preencher o campo de quantidade no painel de resultados.</p>
      *
      * @return Tamanho atual da lista de números.
-     * @author laboratorio
-     * @version 1.0
      */
     public int quantidade() {
         return listaNumeros.size();
