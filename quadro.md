@@ -98,31 +98,96 @@
 - **Resultado Final:** O foco foi medir e comparar a execução dos algoritmos, não desenvolver o código a partir de testes automatizados prévios.
 
 
-## Aula 7
+## Aula 7: Merge Sort, Quick Sort + 1ª Avaliação
 
-**MergeSort**
-- Categoria: codificação complexa
-- Complexidade: O(n log n)
-- Implementado no ecossistema Java
-- Método recursivo que divide a estrutura para ordenar (princípio de árvore)
-  - 1 - método de recursão
-  - 2 - método de intercalação (merge) — aqui ocorre a ordenação; é no retorno das chamadas recursivas
-  - Sempre divide a estrutura de forma mais ou menos uniforme
+Paradigma comum aos dois métodos: **dividir para conquistar**. Ambos são recursivos e organizam o trabalho em forma de árvore de chamadas.
 
-Recursão
-|
-|                               A
-|                 volta da      |
-|                 recursão      |
-V                 intercalação  |
-                  ------------
-                   ordenação
+### Merge Sort (Intercalação)
 
-**QuickSort** **`Dividir para conquistar`**
-- Categoria: codificação complexa
-- Complexidade: O(n log n)
-- Implementado no ecossistema C#
-- Método recursivo que divide a estrutura para ordenar (princípio de árvore)
-  - 1 - recursão
-  - 2 - posicionar o pivô na estrutura
-  - Nunca divide a estrutura de forma uniforme (pivô)
+- **Categoria:** codificação complexa.
+- **Complexidade:** O(n log n).
+- **Ecossistema visto em aula:** Java.
+- **Ideia:** divide a estrutura de forma **mais ou menos uniforme** (metade e metade) até chegar em partes mínimas; a ordenação acontece na **volta da recursão**, quando as partes são intercaladas.
+- **Dois métodos envolvidos:**
+  1. **Recursão:** quebra a lista até o caso base.
+  2. **Intercalação (merge):** combina duas metades já ordenadas em uma só sequência ordenada.
+
+```
+ida (divisão)                         volta (intercalação)
+     |                                         A
+     |                          ordenação      |
+     V                          ocorre aqui    |
+lista grande  →  metades  →  ...  →  merge das partes
+```
+
+### Quick Sort (Pivô)
+
+- **Categoria:** codificação complexa.
+- **Complexidade:** O(n log n) no caso médio; piora se o pivô for mal escolhido.
+- **Ecossistema visto em aula:** C#.
+- **Ideia:** escolhe um **pivô**, posiciona-o na estrutura e recorre às partições à esquerda e à direita. **Não divide de forma uniforme** — o tamanho das partições depende do pivô.
+- **Dois métodos envolvidos:**
+  1. **Recursão:** aplica o processo nas partições.
+  2. **Posicionamento do pivô:** elementos menores de um lado, maiores do outro.
+
+### Comparação Rápida
+
+- **Merge Sort:** divisão equilibrada; ordena na intercalação (retorno das chamadas).
+- **Quick Sort:** divisão desigual (pivô); ordena ao posicionar o pivô.
+- **Uso prático:** métodos de baixa complexidade (bolha, seleção, inserção) servem bem para volumes pequenos ou didática; Merge e Quick entram quando o volume cresce e O(n²) deixa de ser viável.
+
+### Laboratório (para continuar em lab)
+
+Projeto em **MVC** com interface gráfica (Swing):
+
+- **Model (`Model`):** guarda a lista de inteiros carregada.
+- **View (`JFramePrincipal`):** caminho do arquivo, escolha do método, execução e exibição de métricas (quantidade de números, comparações, trocas e tempo).
+- **Controller (`Ordenacao`):** Bolha, Seleção, Inserção e Pente, com contagem de comparações e trocas.
+- **Utilitário (`Util`):** carrega o arquivo texto na lista.
+
+---
+
+### 1ª Avaliação — O que saber
+
+#### Por que ordenar?
+
+Ordenar reduz o custo das consultas posteriores, permite critérios estáveis de apresentação e é pré-requisito de estruturas e buscas eficientes (por exemplo, busca binária e algumas árvores). Sem ordem, cada pesquisa tende a percorrer a coleção inteira.
+
+#### Ordenação por 1ª, 2ª e 3ª chave (ordenação aninhada)
+
+É o desempate por critérios sucessivos:
+
+1. **1ª chave:** critério principal (ex.: nome).
+2. **2ª chave:** usado só quando a 1ª chave empata (ex.: idade).
+3. **3ª chave:** novo desempate (ex.: matrícula).
+
+Na prática: compara-se o critério 1; se for igual, o critério 2; se ainda for igual, o critério 3.
+
+#### Grau de complexidade
+
+Mede o esforço do algoritmo em função do tamanho da entrada (comparações, trocas, tempo). Exemplos do curso:
+
+- **Baixa complexidade (simples, em geral O(n²)):** Bubble Sort, Selection Sort, Insertion Sort — fáceis de implementar; ruins em listas grandes.
+- **Alta complexidade de implementação, melhor desempenho (em geral O(n log n)):** Merge Sort, Quick Sort, Comb/Pente — mais código e recursão/particionamento; adequados a volumes maiores.
+
+#### Três métodos que devem ser reescritos (e o motivo)
+
+Ao ordenar/pesquisar **objetos** (não só `Integer`), esses métodos definem como o objeto é visto, comparado e considerado igual:
+
+- **`toString()`:** representação textual amigável do objeto (exibição na View, logs e depuração). Sem ele, aparece só a referência padrão da classe.
+- **`compareTo()` (`Comparable` / `Comparator`):** critério de ordem (1ª/2ª/3ª chave). Retorna < 0, 0 ou > 0 e é o que os algoritmos usam para decidir quem vem antes.
+- **`equals()`:** igualdade lógica entre objetos (não a igualdade de referência). Necessário para busca, remoção e estruturas que testam se dois elementos são o mesmo dado.
+
+#### Qual o melhor método de pesquisa e ordenação para cada situação?
+
+Não existe um único “melhor”; depende do volume, da memória, da implementação e se os dados já estão quase ordenados:
+
+| Situação | Caminho típico |
+| --- | --- |
+| Lista pequena / didática | Bolha, Seleção ou Inserção |
+| Lista quase ordenada | Inserção (poucas movimentações) |
+| Volume grande, divisão equilibrada, estabilidade | Merge Sort |
+| Volume grande, boa escolha de pivô, pouca memória extra | Quick Sort |
+| Melhoria simples sobre a bolha | Pente (Comb Sort) |
+| Pesquisa em lista **desordenada** | Sequencial (linear) |
+| Pesquisa em lista **ordenada** | Binária (muito menos comparações) |
