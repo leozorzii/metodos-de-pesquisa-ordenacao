@@ -1,0 +1,65 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package model;
+
+/**
+ *
+ * @author laboratorio
+ */
+public class Sessao {
+      private String numeroCelular;
+    private String dadosSessao;
+
+    public String getNumeroCelular() {
+        return numeroCelular;
+    }
+
+    public void setNumeroCelular(String numeroCelular) {
+        this.numeroCelular = numeroCelular;
+    }
+
+    public String getDadosSessao() {
+        return dadosSessao;
+    }
+
+    public void setDadosSessao(String dadosSessao) {
+        this.dadosSessao = dadosSessao;
+    }
+
+    public Sessao(String numeroCelular, String dadosSessao) {
+        this.numeroCelular = numeroCelular;
+        this.dadosSessao = dadosSessao;
+    }
+
+    @Override
+    public String toString() {
+        return "Sessao [numeroCelular=" + numeroCelular + ", dadosSessao=" + dadosSessao + "]";
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((numeroCelular == null) ? 0 : numeroCelular.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+          if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Sessao other = (Sessao) obj;
+        if (numeroCelular == null) {
+            if (other.numeroCelular != null)
+                return false;
+        } else if (!numeroCelular.equals(other.numeroCelular))
+            return false;
+        return true;
+    }
+  }
