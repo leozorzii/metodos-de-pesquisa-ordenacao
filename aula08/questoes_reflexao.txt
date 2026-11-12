@@ -1,0 +1,36 @@
+1. As 3 principais estruturas para armazenar dados em memória
+
+
+Vetor (array): guarda os elementos em posições de memória, cada uma identificada por um índice. Como o endereço de cada posição pode ser calculado diretamente, o acesso por índice é imediato. A desvantagem é que o tamanho costuma ser fixo, e inserir ou remover no meio exige deslocar elementos.
+
+Lista (como ArrayList/List): cresce e diminui conforme a necessidade. Na lista encadeada, cada nó guarda o dado e uma referência para o próximo. Isso facilita inserções e remoções, mas a busca é sequencial, O(n).
+
+Tabela Hash (como HashMap/Dict): armazena pares chave–valor. Uma função calcula a posição de cada chave, o que dá acesso direto, pula diretamente para aquele valor. É a estrutura mais eficiente para busca por chave.
+
+2. Pesquisa binária:
+	Como a estrutura deve estar: os dados precisam estar ordenados (crescente ou decrescente). A estrutura também precisa permitir acesso direto por índice, como um vetor, para conseguir chegar ao elemento do meio.
+
+Filosofia de trabalho: se baseia em “dividir para conquistar”. O algoritmo compara o valor buscado com o elemento do meio:
+
+Se for igual, encontrou.
+Se for menor, descarta a metade direita e continua na esquerda.
+Se for maior, descarta a metade esquerda e continua na direita.
+Ex: teu numero ta entre 50 e 100? se não já corta metade e pega só de 50 pra baixo.
+
+A cada passo, metade dos elementos é eliminada, por isso a complexidade é O(log n).
+
+
+3. Recurso que garante O(1) na Tabela Hash
+
+O recurso é a função hash (função de espalhamento). Ela recebe a chave e calcula diretamente o índice onde o dado será guardado ou buscado. Um exemplo lógico: índice = chave % tamanho_da_tabela. Como a posição é calculada, e não procurada, o acesso é imediato, pula direto naquele indice.
+
+Também vale citar o tratamento de colisões (quando duas chaves geram o mesmo índice), feito por encadeamento ou endereçamento aberto. Isso mantém o desempenho próximo de O(1).
+
+4.
+Passo 1: inicio=0, fim=16, meio=8, valor=10 -> 24 > 10, procura na metade direita
+Passo 2: inicio=9, fim=16, meio=12, valor=25 -> 24 < 25, procura na metade esquerda
+Passo 3: inicio=9, fim=11, meio=10, valor=20 -> 24 > 20, procura na metade direita
+Passo 4: inicio=11, fim=11, meio=11, valor=24 -> 24 = 24, ENCONTRADO!
+
+Número 24 encontrado na posição 11.
+Total de comparações: 4

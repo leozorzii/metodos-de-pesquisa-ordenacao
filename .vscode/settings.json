@@ -1,0 +1,12 @@
+{
+  // Impede o Python de gerar as pastas __pycache__ no terminal integrado
+  "terminal.integrated.env.windows": {
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  // Esconde do explorer o que sobrar de cache/compilacao
+  "files.exclude": {
+    "**/__pycache__": true,
+    "**/*.pyc": true,
+    "**/*.class": true
+  }
+}
