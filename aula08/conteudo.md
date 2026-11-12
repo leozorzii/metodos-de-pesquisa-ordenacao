@@ -8,7 +8,4 @@ Hash Map - principio de dict(dicionario)
 precisa da chave: conteudo(lista, variavel)
 
 
-
-
-
 Hash set - controle de duplicidade

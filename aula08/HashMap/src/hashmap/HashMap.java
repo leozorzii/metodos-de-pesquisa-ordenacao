@@ -14,7 +14,7 @@ public class HashMap {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        view.ServidorJFrame.main(args);
     }
     
 }
